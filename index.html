@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Saravana — GitHub Pages</title>
+  </head>
+  <body>
+    <h1>Welcome — Saravana</h1>
+    <p>This is my GitHub Pages site. Visit my AWS app:</p>
+    <ul>
+      <li><a href="http://16.112.34.233" target="_blank">Open AWS app (HTTP)</a></li>
+      <li><a href="https://16.112.34.233" target="_blank">Open AWS app (HTTPS)</a> (requires ALB/HTTPS setup; will fail without HTTPS cert)</li>
+    </ul>
+
+    <!-- Simple iframe embed (optional) -->
+    <h3>Embedded AWS app (iframe)</h3>
+    <iframe src="http://16.112.34.233" style="width:100%;height:600px;border:1px solid #ccc;"></iframe>
+
+    <p>Note: If HTTPS is enabled on the AWS side, browsers may block insecure mixed content when this page is served over HTTPS. We'll fix that when we enable HTTPS properly on AWS.</p>
+  </body>
+</html>

@@ -1,21 +1,521 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Saravana — GitHub Pages</title>
-  </head>
-  <body>
-    <h1>Welcome — Saravana</h1>
-    <p>This is my GitHub Pages site. Visit my AWS app:</p>
-    <ul>
-      <li><a href="http://16.112.34.233" target="_blank">Open AWS app (HTTP)</a></li>
-      <li><a href="https://16.112.34.233" target="_blank">Open AWS app (HTTPS)</a> (requires ALB/HTTPS setup; will fail without HTTPS cert)</li>
-    </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saravanakumar Chandrasekar — Portfolio</title>
+  <meta name="description" content="Saravanakumar Chandrasekar — DevOps & Web Projects, Weather App, Linux server enthusiast" />
 
-    <!-- Simple iframe embed (optional) -->
-    <h3>Embedded AWS app (iframe)</h3>
-    <iframe src="http://16.112.34.233" style="width:100%;height:600px;border:1px solid #ccc;"></iframe>
+  <!-- Google Font (single external request) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <p>Note: If HTTPS is enabled on the AWS side, browsers may block insecure mixed content when this page is served over HTTPS. We'll fix that when we enable HTTPS properly on AWS.</p>
-  </body>
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: linear-gradient(135deg,#7c3aed,#06b6d4);
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --text: #e6eef8;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --mono: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --radius: 14px;
+    }
+
+    /* Light theme (applies when .light is on body) */
+    body.light{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --glass: rgba(15,23,36,0.03);
+      --glass-2: rgba(15,23,36,0.02);
+      --text: #0b1220;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.04), transparent),
+                  var(--bg);
+      color:var(--text);
+      font-family:var(--mono);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .container{grid-template-columns:1fr; padding-bottom:60px}
+    }
+
+    header.card{
+      grid-column:1/-1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .logo{
+      width:56px;height:56px;
+      border-radius:12px;
+      background:var(--accent);
+      display:grid;
+      place-items:center;
+      color:white;
+      font-weight:800;
+      font-size:20px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.5);
+    }
+
+    .title{
+      line-height:1;
+    }
+    .title h1{margin:0;font-size:18px}
+    .title p{margin:0;font-size:13px;color:var(--muted)}
+
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn{
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      background:var(--glass);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+      transition:transform .12s ease, background .12s ease;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background:var(--accent);
+      color:white;
+      box-shadow: 0 8px 24px rgba(12,18,40,0.45);
+    }
+
+    /* Left column: main content */
+    .main{
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.03);
+      min-height:400px;
+      box-shadow: 0 8px 40px rgba(2,6,23,0.45);
+    }
+
+    .hero{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .avatar{
+      width:96px;height:96px;border-radius:14px;
+      background:linear-gradient(135deg,#06b6d4,#7c3aed);
+      display:grid;place-items:center;font-weight:800;font-size:28px;color:white;
+      box-shadow:0 12px 30px rgba(2,6,23,0.5)
+    }
+
+    .hero .info h2{margin:0;font-size:20px}
+    .hero .info p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    .badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .badge{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;font-size:12px;color:var(--muted)}
+
+    /* Projects grid */
+    .projects{
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width:700px){ .projects{grid-template-columns:1fr} }
+
+    .card{
+      background: linear-gradient(180deg,var(--card), rgba(255,255,255,0.01));
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+    }
+    .card:hover{ transform:translateY(-8px); box-shadow: 0 18px 50px rgba(2,6,23,0.55) }
+
+    .project-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .project-title h3{margin:0;font-size:15px}
+    .project-title span{font-size:12px;color:var(--muted)}
+
+    .project-desc{margin-top:8px;color:var(--muted);font-size:13px}
+
+    .project-meta{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass-2);color:var(--muted);}
+
+    .links{display:flex;gap:8px}
+    .link{
+      padding:8px 10px;border-radius:8px;font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:var(--text);text-decoration:none;
+    }
+    .link.secondary{background:transparent;color:var(--muted);font-weight:600}
+
+    /* Right column: sidebar */
+    .sidebar{
+      position:sticky;
+      top:32px;
+      height:max-content;
+      align-self:start;
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.45);
+    }
+    .profile-line{display:flex;gap:12px;align-items:center}
+    .small-avatar{width:52px;height:52px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:white;font-weight:800}
+
+    .bio{margin-top:12px;color:var(--muted);font-size:14px}
+
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .skill{padding:8px 10px;border-radius:10px;background:var(--glass-2);font-weight:700;font-size:13px;color:var(--muted)}
+
+    .contact{
+      margin-top:18px;
+      display:grid;
+      gap:8px;
+    }
+    .contact a{display:inline-block;padding:10px;border-radius:10px;text-decoration:none;background:var(--glass);color:var(--text);font-weight:700}
+
+    footer{
+      grid-column:1/-1;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* subtle utilities */
+    .muted{color:var(--muted)}
+    .pill{padding:8px 12px;border-radius:999px;background:var(--glass-2);font-weight:700}
+    .tiny{font-size:12px}
+    .sep{height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);margin:14px 0;border-radius:4px}
+    .cta-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+    input[type="text"],textarea{
+      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);
+      font-family:var(--mono);font-size:13px;
+    }
+
+    /* little micro-animations */
+    .shine {
+      position:relative;
+      overflow:hidden;
+    }
+    .shine::after{
+      content:"";
+      position:absolute;
+      left:-120%;
+      top:0;
+      width:60%;
+      height:100%;
+      transform:skewX(-20deg);
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.06), rgba(255,255,255,0));
+      animation: shimmer 4.5s linear infinite;
+      opacity:0.6;
+      mix-blend-mode: overlay;
+    }
+    @keyframes shimmer{
+      0%{left:-120%}50%{left:120%}100%{left:120%}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="card">
+      <div class="brand">
+        <div class="logo">SK</div>
+        <div class="title">
+          <h1>Saravanakumar Chandrasekar</h1>
+          <p>DevOps · Linux · Web · Weather-app enthusiast</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="downloadBtn" title="Download CV (placeholder)">
+          ⬇️ Download CV
+        </button>
+        <button class="btn" id="themeToggle" title="Toggle light / dark">
+          🌗
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="hero card">
+        <div class="avatar">SK</div>
+        <div class="info">
+          <h2>Hello — I'm Saravanakumar</h2>
+          <p class="muted">Manual tester turned DevOps learner. Building a Weather-App and experimenting with Linux servers, automation, and CI/CD.</p>
+
+          <div class="badges">
+            <div class="badge">Linux</div>
+            <div class="badge">Docker</div>
+            <div class="badge">Ansible</div>
+            <div class="badge">Python</div>
+            <div class="badge">GitHub Pages</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h3 style="margin:0">Featured Projects</h3>
+            <p class="muted tiny" style="margin-top:6px">A selection of projects and demos — click to view.</p>
+          </div>
+          <div class="pill tiny">Updated: Oct 26, 2025</div>
+        </div>
+
+        <div class="projects" style="margin-top:14px">
+          <!-- Project 1 -->
+          <article class="card">
+            <div class="project-title">
+              <h3>Weather-App (DevOps Guide)</h3>
+              <span class="muted tiny">Node • Docker • GitHub Actions</span>
+            </div>
+            <p class="project-desc">A small weather dashboard + CI pipeline. Includes automated tests and a deployment workflow. (Roadmap tracked in chat.)</p>
+
+            <div class="project-meta">
+              <div class="tags">
+                <div class="tag">CI/CD</div>
+                <div class="tag">Docker</div>
+                <div class="tag">pytest</div>
+              </div>
+              <div class="links">
+                <a class="link" href="https://github.com/SaravanaKumarChandrasekar" target="_blank" rel="noopener">GitHub</a>
+                <a class="link secondary" href="#" onclick="alert('Replace with live link')" >Live</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="card">
+            <div class="project-title">
+              <h3>Linux Server Lab Notes</h3>
+              <span class="muted tiny">BIND • Samba • Mail</span>
+            </div>
+            <p class="project-desc">Practical lab configs for DNS, Samba, mail and more — crafted as step-by-step guides you can follow from scratch.</p>
+
+            <div class="project-meta">
+              <div class="tags">
+                <div class="tag">RHEL</div>
+                <div class="tag">BIND</div>
+                <div class="tag">Samba</div>
+              </div>
+              <div class="links">
+                <a class="link" href="#" onclick="alert('Open your notes file or repo')" >Notes</a>
+                <a class="link secondary" href="#" onclick="alert('Open terminal guide')" >Guide</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="card">
+            <div class="project-title">
+              <h3>Portfolio Website</h3>
+              <span class="muted tiny">HTML • Nginx • HTTPS</span>
+            </div>
+            <p class="project-desc">This single-file portfolio is mobile-friendly, with dark mode and quick contact controls — perfect for GitHub Pages or EC2 hosting.</p>
+
+            <div class="project-meta">
+              <div class="tags">
+                <div class="tag">GitHub Pages</div>
+                <div class="tag">Nginx</div>
+              </div>
+              <div class="links">
+                <a class="link" href="https://SaravanaKumarChandrasekar.github.io" target="_blank" rel="noopener">GitHub Pages</a>
+                <a class="link secondary" href="#" onclick="alert('Map elastic IP → domain via DNS & reverse proxy')" >Deploy</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="card">
+            <div class="project-title">
+              <h3>Automation Scripts</h3>
+              <span class="muted tiny">Bash • Ansible</span>
+            </div>
+            <p class="project-desc">Shell utilities and Ansible playbooks for provisioning servers, configuring YUM repos, and automating repetitive tasks.</p>
+
+            <div class="project-meta">
+              <div class="tags">
+                <div class="tag">Ansible</div>
+                <div class="tag">YUM</div>
+              </div>
+              <div class="links">
+                <a class="link" href="#" onclick="alert('Open playbook repo')">Repo</a>
+                <a class="link secondary" href="#" onclick="alert('Run playbook instructions')">Run</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <section class="card" style="margin-top:14px">
+        <h3 style="margin:0">About / Summary</h3>
+        <p class="muted" style="margin-top:8px">
+          I'm focused on learning server automation, containerization, monitoring (Prometheus & Grafana), and delivering reliable deployments for small web apps like the Weather-App.
+          I prefer clear, step-by-step guides (atom-level explanations) so anyone can reproduce the setup.
+        </p>
+
+        <div class="sep"></div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <div>
+            <strong>Current focus</strong>
+            <div class="muted tiny">Docker → CI → Monitoring → Terraform / Ansible</div>
+          </div>
+          <div style="flex:1"></div>
+          <div class="tiny muted">Also a fan of Thalapathy Vijay 🎬</div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="sidebar">
+      <div class="profile-line">
+        <div class="small-avatar">SK</div>
+        <div>
+          <div style="font-weight:800">Saravanakumar Chandrasekar</div>
+          <div class="muted tiny">Manual tester • Aspiring DevOps</div>
+        </div>
+      </div>
+
+      <p class="bio muted" style="margin-top:12px">
+        I build reproducible dev environments, document steps in detail, and keep a learning roadmap for the Weather-App and Linux labs.
+      </p>
+
+      <div style="margin-top:12px">
+        <div style="font-weight:800;margin-bottom:8px">Skills</div>
+        <div class="skill-list">
+          <div class="skill">Linux</div>
+          <div class="skill">Bash</div>
+          <div class="skill">Docker</div>
+          <div class="skill">Git</div>
+          <div class="skill">Nginx</div>
+          <div class="skill">Python</div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div style="font-weight:800;margin-bottom:8px">Contact</div>
+        <div class="contact">
+          <a href="mailto:your.email@example.com" class="tiny">✉️ Email</a>
+          <a href="https://github.com/SaravanaKumarChandrasekar" target="_blank" rel="noopener" class="tiny">🐙 GitHub</a>
+          <a href="https://SaravanaKumarChandrasekar.github.io" target="_blank" rel="noopener" class="tiny">🌐 GitHub Pages</a>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div style="font-weight:800;margin-bottom:8px">Quick Contact</div>
+        <form onsubmit="sendContact(event)">
+          <input type="text" id="name" placeholder="Your name" required>
+          <div style="height:8px"></div>
+          <input type="text" id="email" placeholder="Your email" required>
+          <div style="height:8px"></div>
+          <textarea id="message" placeholder="Short message" rows="3" required></textarea>
+          <div class="cta-row" style="margin-top:8px">
+            <button type="submit" class="btn primary">Send</button>
+            <button type="button" class="btn" onclick="copyEmail()">Copy Email</button>
+          </div>
+        </form>
+      </div>
+    </aside>
+
+    <footer>
+      Built with care • Single-file portfolio • Replace placeholder content with your real links. © Saravanakumar Chandrasekar
+    </footer>
+  </div>
+
+  <script>
+    // Prefill from memory (we used your name from chat history)
+    const userName = "Saravanakumar Chandrasekar";
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    (function initTheme(){
+      const saved = localStorage.getItem('site-theme');
+      if(saved === 'light'){ body.classList.add('light') }
+    })();
+    themeToggle.addEventListener('click',()=>{
+      body.classList.toggle('light');
+      localStorage.setItem('site-theme', body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Download CV placeholder (could be wired to a real CV file)
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const link = document.createElement('a');
+      link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(userName + ' — CV placeholder\nReplace with actual PDF link.');
+      link.download = 'CV_' + userName.replace(/\s+/g,'_') + '.txt';
+      link.click();
+    });
+
+    // Contact form uses mailto fallback
+    function sendContact(e){
+      e.preventDefault();
+      const n = document.getElementById('name').value.trim();
+      const em = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent('Portfolio message from ' + n);
+      const body = encodeURIComponent('Name: ' + n + '\\nEmail: ' + em + '\\n\\n' + msg);
+      // opens mail client
+      window.location.href = 'mailto:your.email@example.com?subject=' + subject + '&body=' + body;
+    }
+
+    function copyEmail(){
+      navigator.clipboard?.writeText('your.email@example.com')?.then(()=>alert('Email copied to clipboard'));
+    }
+
+    // Small progressive enhancement: replace placeholders with real username if available
+    document.querySelectorAll('.logo, .small-avatar').forEach(el=>{
+      // keep initials but allow customizing later
+    });
+
+  </script>
+</body>
 </html>
+

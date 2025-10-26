@@ -162,7 +162,44 @@
       gap:14px;
       margin-top:12px;
     }
-    @media (max-width:700px){ .projects{grid-template-columns:1fr} }
+    @media (max-width:980px){
+      body{padding:12px}
+      .container{grid-template-columns:1fr;gap:12px;max-width:100%}
+      header.card{flex-direction:row;align-items:center;justify-content:space-between;padding:12px;gap:8px}
+      /* stack brand elements when extremely narrow */
+      @media (max-width:520px){
+        header.card{flex-direction:column;align-items:flex-start;gap:10px}
+        .controls{width:100%;display:flex;justify-content:space-between}
+      }
+
+      .brand{display:flex;gap:10px;align-items:center}
+      .title h1{font-size:16px}
+      .title p{font-size:12px}
+      .controls{width:auto;justify-content:flex-end;gap:6px}
+      .controls .btn{padding:8px 10px;font-size:13px}
+      .ccd-inline{display:none !important} /* hide mascot on small screens */
+      .avatar{width:64px;height:64px;font-size:20px}
+      .hero{gap:10px}
+      .main{padding:12px}
+      .projects{grid-template-columns:1fr;gap:10px}
+      .card{padding:12px}
+      .sidebar{position:relative;top:auto;padding:12px}
+      footer{font-size:12px}
+
+      /* make long text wrap and buttons full width for touch */
+      .project-title h3{word-break:break-word}
+      .project-desc{word-break:break-word}
+      .links{flex-wrap:wrap;gap:6px}
+      .link, .btn{min-width:0}
+
+      /* make contact inputs fill width and buttons stack */
+      .contact input, .contact textarea{width:100%}
+      .cta-row{flex-direction:column}
+      .cta-row .btn{width:100%}
+
+      /* reduce shadows & radii for denser layout */
+      .card{border-radius:10px}
+    } }
 
     .card{
       background: linear-gradient(180deg,var(--card), rgba(255,255,255,0.01));

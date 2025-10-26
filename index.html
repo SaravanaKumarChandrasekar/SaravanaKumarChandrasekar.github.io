@@ -182,7 +182,7 @@
 
     .project-meta{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
     .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass-2);color:var(--muted);}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass-2);color:var(--muted);} 
 
     .links{display:flex;gap:8px}
     .link{
@@ -258,6 +258,32 @@
     @keyframes shimmer{
       0%{left:-120%}50%{left:120%}100%{left:120%}
     }
+
+    /* -------------------------- */
+    /* Cotton-candy dog mascot CSS */
+    /* Namespaced to avoid collisions: use .ccd- prefix */
+    .ccd-mascot{
+      position:fixed;
+      left:22px;
+      bottom:22px;
+      width:170px;
+      z-index:9999;
+      pointer-events:none; /* doesn't block clicks, but JS listens to window events */
+      transform:translateZ(0);
+      filter:drop-shadow(0 12px 28px rgba(2,6,23,0.45));
+    }
+    @media (max-width:700px){ .ccd-mascot{display:none} }
+
+    .ccd-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7));
+      border-radius:14px;padding:10px;display:flex;align-items:center;gap:8px;width:100%;
+      box-shadow:0 8px 28px rgba(2,6,23,0.25);
+    }
+    .ccd-label{font-weight:800;color:#7a4056;font-size:13px}
+
+    /* make pupils transform smoothly */
+    .ccd-pupil{transition:transform 0.05s linear}
+
   </style>
 </head>
 <body>
@@ -273,6 +299,18 @@
       </div>
 
       <div class="controls">
+        <!-- Inline cotton-candy mascot near header controls -->
+        <div class="ccd-inline" aria-hidden="true" style="pointer-events:none;display:flex;align-items:center;gap:8px;margin-right:6px">
+          <svg viewBox="0 0 320 280" width="88" height="75" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g transform="translate(14,10)"><ellipse cx="30" cy="30" rx="32" ry="46" fill="#ff9fb1"/></g>
+            <g transform="translate(214,10)"><ellipse cx="30" cy="30" rx="32" ry="46" fill="#ff9fb1"/></g>
+            <ellipse cx="160" cy="140" rx="110" ry="95" fill="#ffdce6" stroke="#ffb6c9" stroke-width="4"/>
+            <g transform="translate(110,125)"><ellipse cx="0" cy="0" rx="28" ry="22" fill="#ffffff"/><circle class="ccd-pupil" data-eye="left" cx="0" cy="0" r="10" fill="#2b2a33"/><circle cx="-6" cy="-4" r="3" fill="#ffffff" opacity="0.9"/></g>
+            <g transform="translate(210,125)"><ellipse cx="0" cy="0" rx="28" ry="22" fill="#ffffff"/><circle class="ccd-pupil" data-eye="right" cx="0" cy="0" r="10" fill="#2b2a33"/><circle cx="-6" cy="-4" r="3" fill="#ffffff" opacity="0.9"/></g>
+            <path d="M150 160 Q160 175 170 160" fill="#ff9fb1" stroke="#ff7a9a" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+
         <button class="btn" id="downloadBtn" title="Download CV (placeholder)">
           ⬇️ Download CV
         </button>
@@ -287,7 +325,7 @@
         <div class="avatar">SK</div>
         <div class="info">
           <h2>Hello — I'm Saravanakumar</h2>
-          <p class="muted">Manual tester turned DevOps learner. Building a Weather-App and experimenting with Linux servers, automation, and CI/CD.</p>
+          <p class="muted">QA turned DevOps learner. Building a Weather-App and experimenting with Linux servers, automation, and CI/CD.</p>
 
           <div class="badges">
             <div class="badge">Linux</div>
@@ -299,6 +337,9 @@
         </div>
       </section>
 
+      <!-- rest of the portfolio content (projects, about, etc.) is unchanged -->
+
+      <!-- Featured Projects -->
       <section class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <div>
@@ -409,7 +450,7 @@
             <div class="muted tiny">Docker → CI → Monitoring → Terraform / Ansible</div>
           </div>
           <div style="flex:1"></div>
-          <div class="tiny muted">Also a fan of Thalapathy Vijay 🎬</div>
+          <div class="tiny muted"></div>
         </div>
       </section>
 
@@ -420,7 +461,7 @@
         <div class="small-avatar">SK</div>
         <div>
           <div style="font-weight:800">Saravanakumar Chandrasekar</div>
-          <div class="muted tiny">Manual tester • Aspiring DevOps</div>
+          <div class="muted tiny">QA • Aspiring DevOps</div>
         </div>
       </div>
 
@@ -470,6 +511,9 @@
     </footer>
   </div>
 
+  </div>
+  </div>
+
   <script>
     // Prefill from memory (we used your name from chat history)
     const userName = "Saravanakumar Chandrasekar";
@@ -501,7 +545,7 @@
       const em = document.getElementById('email').value.trim();
       const msg = document.getElementById('message').value.trim();
       const subject = encodeURIComponent('Portfolio message from ' + n);
-      const body = encodeURIComponent('Name: ' + n + '\\nEmail: ' + em + '\\n\\n' + msg);
+      const body = encodeURIComponent('Name: ' + n + '\nEmail: ' + em + '\n\n' + msg);
       // opens mail client
       window.location.href = 'mailto:your.email@example.com?subject=' + subject + '&body=' + body;
     }
@@ -510,12 +554,59 @@
       navigator.clipboard?.writeText('your.email@example.com')?.then(()=>alert('Email copied to clipboard'));
     }
 
-    // Small progressive enhancement: replace placeholders with real username if available
-    document.querySelectorAll('.logo, .small-avatar').forEach(el=>{
-      // keep initials but allow customizing later
-    });
+    // --- Cotton Candy mascot: eyes follow cursor ---
+    (function(){
+      const mascot = document.querySelector('.ccd-mascot');
+      const pupils = Array.from(document.querySelectorAll('.ccd-pupil'));
+
+      let pointer = {x: window.innerWidth/2, y: window.innerHeight/2};
+
+      function updatePointer(e){
+        if(e.touches && e.touches.length){
+          pointer.x = e.touches[0].clientX;
+          pointer.y = e.touches[0].clientY;
+        } else {
+          pointer.x = e.clientX;
+          pointer.y = e.clientY;
+        }
+      }
+
+      window.addEventListener('mousemove', updatePointer);
+      window.addEventListener('touchmove', function(ev){ ev.preventDefault(); updatePointer(ev); }, {passive:false});
+
+      function computeEyes(){
+        return pupils.map(p => {
+          const eyeGroup = p.parentNode;
+          const eyeRect = eyeGroup.getBoundingClientRect();
+          const cx = eyeRect.left + eyeRect.width/2;
+          const cy = eyeRect.top + eyeRect.height/2;
+          const max = Math.min(eyeRect.width, eyeRect.height) * 0.28;
+          return {pupil:p, cx, cy, max};
+        });
+      }
+
+      let eyes = computeEyes();
+      window.addEventListener('resize', ()=>{ eyes = computeEyes(); });
+
+      function animate(){
+        for(const e of eyes){
+          const dx = pointer.x - e.cx;
+          const dy = pointer.y - e.cy;
+          const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+          const nx = dx/dist, ny = dy/dist;
+          const d = Math.min(e.max, dist*0.14 + 2);
+          const tx = nx * d;
+          const ty = ny * d;
+          e.pupil.style.transform = `translate(${tx}px, ${ty}px)`;
+        }
+        requestAnimationFrame(animate);
+      }
+
+      pointer.x = window.innerWidth/2; pointer.y = window.innerHeight/2;
+      requestAnimationFrame(animate);
+
+    })();
 
   </script>
 </body>
 </html>
-

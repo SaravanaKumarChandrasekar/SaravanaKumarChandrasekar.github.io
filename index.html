@@ -284,6 +284,28 @@
     /* make pupils transform smoothly */
     .ccd-pupil{transition:transform 0.05s linear}
 
+  
+
+    /* Mobile-specific tweaks: make header & projects fit small screens */
+    @media (max-width:700px){
+      body{padding:16px}
+      .container{grid-template-columns:1fr;gap:14px}
+      header.card{flex-direction:column;align-items:flex-start;padding:14px;gap:12px}
+      .brand{width:100%;display:flex;gap:12px;align-items:center}
+      .title h1{font-size:16px}
+      .title p{font-size:12px}
+      .controls{width:100%;justify-content:flex-end;gap:8px}
+      .controls .btn{padding:8px 10px;font-size:13px}
+      .ccd-inline{display:none !important} /* hide mascot on small screens */
+      .avatar{width:72px;height:72px;font-size:22px}
+      .hero{gap:12px}
+      .main{padding:14px}
+      .projects{grid-template-columns:1fr;gap:12px}
+      .card{padding:12px}
+      .sidebar{position:relative;top:auto;padding:14px}
+      footer{font-size:12px}
+    }
+
   </style>
 </head>
 <body>

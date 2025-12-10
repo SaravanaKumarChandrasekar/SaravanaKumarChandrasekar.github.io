@@ -1,671 +1,1289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Saravanakumar Chandrasekar — Portfolio</title>
-  <meta name="description" content="Saravanakumar Chandrasekar — DevOps & Web Projects, Weather App, Linux server enthusiast" />
+  <meta charset="UTF-8" />
+  <title>Saravanakumar Chandrasekar | DevOps & Cloud Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portfolio of Saravanakumar Chandrasekar - DevOps Engineer with hands-on experience in AWS, Linux, Docker, monitoring (Prometheus, Grafana, LogicMonitor), automation and cloud reliability."
+  />
 
-  <!-- Google Font (single external request) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root{
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: linear-gradient(135deg,#7c3aed,#06b6d4);
-      --glass: rgba(255,255,255,0.04);
-      --glass-2: rgba(255,255,255,0.03);
-      --text: #e6eef8;
-      --success: #22c55e;
-      --danger: #ef4444;
-      --mono: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      --radius: 14px;
+    :root {
+      --bg-main: #020617;
+      --bg-card: rgba(15, 23, 42, 0.96);
+      --accent-1: #f97316;
+      --accent-2: #22c55e;
+      --accent-3: #3b82f6;
+      --accent-4: #e11d48;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.9);
+      --radius-xl: 24px;
+      --transition-fast: 0.25s ease;
     }
 
-    /* Light theme (applies when .light is on body) */
-    body.light{
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --muted: #6b7280;
-      --glass: rgba(15,23,36,0.03);
-      --glass-2: rgba(15,23,36,0.02);
-      --text: #0b1220;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.06), transparent),
-                  radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.04), transparent),
-                  var(--bg);
-      color:var(--text);
-      font-family:var(--mono);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:32px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .container{
-      max-width:1100px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:28px;
-      align-items:start;
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #111827 0, #020617 45%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
     }
 
-    /* Responsive */
-    @media (max-width:980px){
-      .container{grid-template-columns:1fr; padding-bottom:60px}
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    header.card{
-      grid-column:1/-1;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 24px rgba(2,6,23,0.6);
-      backdrop-filter: blur(6px);
+    ul {
+      list-style: none;
     }
 
-    .brand{
-      display:flex;
-      gap:14px;
-      align-items:center;
-    }
-    .logo{
-      width:56px;height:56px;
-      border-radius:12px;
-      background:var(--accent);
-      display:grid;
-      place-items:center;
-      color:white;
-      font-weight:800;
-      font-size:20px;
-      box-shadow: 0 6px 20px rgba(2,6,23,0.5);
+    .page-wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
     }
 
-    .title{
-      line-height:1;
-    }
-    .title h1{margin:0;font-size:18px}
-    .title p{margin:0;font-size:13px;color:var(--muted)}
+    /* HEADER / NAVBAR */
 
-    .controls{
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    .btn{
-      border:0;
-      padding:10px 14px;
-      border-radius:10px;
-      background:var(--glass);
-      color:var(--text);
-      cursor:pointer;
-      font-weight:600;
-      transition:transform .12s ease, background .12s ease;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      background:var(--accent);
-      color:white;
-      box-shadow: 0 8px 24px rgba(12,18,40,0.45);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(30, 64, 175, 0.85),
+        rgba(220, 38, 38, 0.45)
+      );
+      border-radius: 999px;
+      margin: 10px auto 26px;
+      padding: 10px 18px;
+      max-width: 1120px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
 
-    /* Left column: main content */
-    .main{
-      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:20px;
-      border:1px solid rgba(255,255,255,0.03);
-      min-height:400px;
-      box-shadow: 0 8px 40px rgba(2,6,23,0.45);
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .hero{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      margin-bottom:18px;
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .avatar{
-      width:96px;height:96px;border-radius:14px;
-      background:linear-gradient(135deg,#06b6d4,#7c3aed);
-      display:grid;place-items:center;font-weight:800;font-size:28px;color:white;
-      box-shadow:0 12px 30px rgba(2,6,23,0.5)
+    .nav-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 160deg,
+        #22c55e,
+        #3b82f6,
+        #e11d48,
+        #fbbf24,
+        #22c55e
+      );
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .hero .info h2{margin:0;font-size:20px}
-    .hero .info p{margin:6px 0 0;color:var(--muted);font-size:14px}
-
-    .badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-    .badge{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;font-size:12px;color:var(--muted)}
-
-    /* Projects grid */
-    .projects{
-      display:grid;
-      grid-template-columns: repeat(2,1fr);
-      gap:14px;
-      margin-top:12px;
+    .nav-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #1d4ed8, #020617 55%, #000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #e5e7eb;
+      font-size: 0.9rem;
     }
-    @media (max-width:980px){
-      body{padding:12px}
-      .container{grid-template-columns:1fr;gap:12px;max-width:100%}
-      header.card{flex-direction:row;align-items:center;justify-content:space-between;padding:12px;gap:8px}
-      /* stack brand elements when extremely narrow */
-      @media (max-width:520px){
-        header.card{flex-direction:column;align-items:flex-start;gap:10px}
-        .controls{width:100%;display:flex;justify-content:space-between}
+
+    .nav-title-main {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-size: 1rem;
+    }
+
+    .nav-title-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.88rem;
+    }
+
+    .nav-links a {
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: #d1d5db;
+      border: 1px solid transparent;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+      border-color: rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top, rgba(96, 165, 250, 0.25), transparent);
+    }
+
+    .nav-contact-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      color: #f9fafb !important;
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.9);
+    }
+
+    .nav-contact-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 1);
+    }
+
+    @media (max-width: 850px) {
+      header {
+        border-radius: 18px;
       }
-
-      .brand{display:flex;gap:10px;align-items:center}
-      .title h1{font-size:16px}
-      .title p{font-size:12px}
-      .controls{width:auto;justify-content:flex-end;gap:6px}
-      .controls .btn{padding:8px 10px;font-size:13px}
-      .ccd-inline{display:none !important} /* hide mascot on small screens */
-      .avatar{width:64px;height:64px;font-size:20px}
-      .hero{gap:10px}
-      .main{padding:12px}
-      .projects{grid-template-columns:1fr;gap:10px}
-      .card{padding:12px}
-      .sidebar{position:relative;top:auto;padding:12px}
-      footer{font-size:12px}
-
-      /* make long text wrap and buttons full width for touch */
-      .project-title h3{word-break:break-word}
-      .project-desc{word-break:break-word}
-      .links{flex-wrap:wrap;gap:6px}
-      .link, .btn{min-width:0}
-
-      /* make contact inputs fill width and buttons stack */
-      .contact input, .contact textarea{width:100%}
-      .cta-row{flex-direction:column}
-      .cta-row .btn{width:100%}
-
-      /* reduce shadows & radii for denser layout */
-      .card{border-radius:10px}
-    } }
-
-    .card{
-      background: linear-gradient(180deg,var(--card), rgba(255,255,255,0.01));
-      padding:14px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.03);
-      transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s;
-      box-shadow: 0 6px 18px rgba(2,6,23,0.35);
-    }
-    .card:hover{ transform:translateY(-8px); box-shadow: 0 18px 50px rgba(2,6,23,0.55) }
-
-    .project-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
-    .project-title h3{margin:0;font-size:15px}
-    .project-title span{font-size:12px;color:var(--muted)}
-
-    .project-desc{margin-top:8px;color:var(--muted);font-size:13px}
-
-    .project-meta{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass-2);color:var(--muted);} 
-
-    .links{display:flex;gap:8px}
-    .link{
-      padding:8px 10px;border-radius:8px;font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,0.04);
-      background:transparent;color:var(--text);text-decoration:none;
-    }
-    .link.secondary{background:transparent;color:var(--muted);font-weight:600}
-
-    /* Right column: sidebar */
-    .sidebar{
-      position:sticky;
-      top:32px;
-      height:max-content;
-      align-self:start;
-      padding:18px;
-      border-radius:12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 8px 30px rgba(2,6,23,0.45);
-    }
-    .profile-line{display:flex;gap:12px;align-items:center}
-    .small-avatar{width:52px;height:52px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:white;font-weight:800}
-
-    .bio{margin-top:12px;color:var(--muted);font-size:14px}
-
-    .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .skill{padding:8px 10px;border-radius:10px;background:var(--glass-2);font-weight:700;font-size:13px;color:var(--muted)}
-
-    .contact{
-      margin-top:18px;
-      display:grid;
-      gap:8px;
-    }
-    .contact a{display:inline-block;padding:10px;border-radius:10px;text-decoration:none;background:var(--glass);color:var(--text);font-weight:700}
-
-    footer{
-      grid-column:1/-1;
-      margin-top:18px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:center;
+      .nav-links {
+        display: none;
+      }
     }
 
-    /* subtle utilities */
-    .muted{color:var(--muted)}
-    .pill{padding:8px 12px;border-radius:999px;background:var(--glass-2);font-weight:700}
-    .tiny{font-size:12px}
-    .sep{height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);margin:14px 0;border-radius:4px}
-    .cta-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-    input[type="text"],textarea{
-      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);
-      font-family:var(--mono);font-size:13px;
+    main {
+      display: grid;
+      gap: 30px;
     }
 
-    /* little micro-animations */
-    .shine {
-      position:relative;
-      overflow:hidden;
-    }
-    .shine::after{
-      content:"";
-      position:absolute;
-      left:-120%;
-      top:0;
-      width:60%;
-      height:100%;
-      transform:skewX(-20deg);
-      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.06), rgba(255,255,255,0));
-      animation: shimmer 4.5s linear infinite;
-      opacity:0.6;
-      mix-blend-mode: overlay;
-    }
-    @keyframes shimmer{
-      0%{left:-120%}50%{left:120%}100%{left:120%}
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.5fr);
+      gap: 20px;
+      align-items: stretch;
+      margin-top: 10px;
     }
 
-    /* -------------------------- */
-    /* Cotton-candy dog mascot CSS */
-    /* Namespaced to avoid collisions: use .ccd- prefix */
-    .ccd-mascot{
-      position:fixed;
-      left:22px;
-      bottom:22px;
-      width:170px;
-      z-index:9999;
-      pointer-events:none; /* doesn't block clicks, but JS listens to window events */
-      transform:translateZ(0);
-      filter:drop-shadow(0 12px 28px rgba(2,6,23,0.45));
-    }
-    @media (max-width:700px){ .ccd-mascot{display:none} }
-
-    .ccd-card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7));
-      border-radius:14px;padding:10px;display:flex;align-items:center;gap:8px;width:100%;
-      box-shadow:0 8px 28px rgba(2,6,23,0.25);
-    }
-    .ccd-label{font-weight:800;color:#7a4056;font-size:13px}
-
-    /* make pupils transform smoothly */
-    .ccd-pupil{transition:transform 0.05s linear}
-
-  
-
-    /* Mobile-specific tweaks: make header & projects fit small screens */
-    @media (max-width:700px){
-      body{padding:16px}
-      .container{grid-template-columns:1fr;gap:14px}
-      header.card{flex-direction:column;align-items:flex-start;padding:14px;gap:12px}
-      .brand{width:100%;display:flex;gap:12px;align-items:center}
-      .title h1{font-size:16px}
-      .title p{font-size:12px}
-      .controls{width:100%;justify-content:flex-end;gap:8px}
-      .controls .btn{padding:8px 10px;font-size:13px}
-      .ccd-inline{display:none !important} /* hide mascot on small screens */
-      .avatar{width:72px;height:72px;font-size:22px}
-      .hero{gap:12px}
-      .main{padding:14px}
-      .projects{grid-template-columns:1fr;gap:12px}
-      .card{padding:12px}
-      .sidebar{position:relative;top:auto;padding:14px}
-      footer{font-size:12px}
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
+    .hero-left {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.3), transparent 60%),
+        rgba(15, 23, 42, 0.97);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: "";
+      position: absolute;
+      inset: -150px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(244, 114, 182, 0.16), transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(45, 212, 191, 0.14), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px 4px 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      margin-bottom: 12px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--text-muted);
+    }
+
+    .hero-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: conic-gradient(from 130deg, #22c55e, #facc15, #f97316, #e11d48, #22c55e);
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .hero-dot-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3.1vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #22c55e, #3b82f6, #f97316, #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-role {
+      font-size: 0.92rem;
+      color: #a5b4fc;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      max-width: 560px;
+    }
+
+    .hero-subtitle strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.92);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .pill-accent-1 { border-color: rgba(248, 113, 113, 0.9); }
+    .pill-accent-2 { border-color: rgba(59, 130, 246, 0.9); }
+    .pill-accent-3 { border-color: rgba(52, 211, 153, 0.9); }
+    .pill-accent-4 { border-color: rgba(251, 191, 36, 0.9); }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      font-size: 0.88rem;
+      padding: 9px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e, #3b82f6);
+      border-color: rgba(74, 222, 128, 0.9);
+      color: #f9fafb;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.85);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) translateX(1px);
+      box-shadow: 0 20px 40px rgba(22, 163, 74, 1);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.75);
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-ghost:hover {
+      background: radial-gradient(circle at top, rgba(96, 165, 250, 0.3), transparent);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+      margin-top: 1px;
+    }
+
+    /* HERO RIGHT */
+
+    .hero-right {
+      padding: 18px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.4), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(248, 113, 113, 0.35), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right-inner {
+      position: relative;
+      z-index: 1;
+      border-radius: calc(var(--radius-xl) - 6px);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 14px 14px 12px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 64, 175, 0.35));
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-badge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .status-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px 12px;
+      align-items: flex-start;
+    }
+
+    .timeline-bullet {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(129, 140, 248, 0.95);
+      background: radial-gradient(circle at 30% 30%, #4f46e5, #1e293b);
+      box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.4);
+      margin-top: 3px;
+    }
+
+    .timeline-title {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .timeline-subtitle {
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .timeline-meta {
+      color: #a5b4fc;
+      margin-top: 2px;
+    }
+
+    .hero-skill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 0.72rem;
+    }
+
+    .skill-chip {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+    }
+
+    /* GENERIC SECTIONS */
+
+    .section {
+      margin-top: 4px;
+      padding: 18px 18px 20px;
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .section-pill {
+      font-size: 0.73rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .section-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* SKILLS GRID */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .skill-card {
+      padding: 12px 12px 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.2), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-fast);
+    }
+
+    .skill-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), transparent);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 1);
+    }
+
+    .skill-card:hover::after {
+      opacity: 1;
+    }
+
+    .skill-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .skill-tag {
+      font-size: 0.76rem;
+      color: #a5b4fc;
+    }
+
+    .skill-bar {
+      margin-top: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(30, 64, 175, 0.5);
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #3b82f6, #f97316);
+      width: var(--level, 80%);
+    }
+
+    /* EXPERIENCE */
+
+    .exp-list {
+      display: grid;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .exp-item {
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 10px 12px 8px;
+      background: rgba(15, 23, 42, 0.98);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exp-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(56, 189, 248, 0.14),
+        rgba(34, 197, 94, 0.12),
+        transparent
+      );
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .exp-item:hover::before {
+      opacity: 1;
+    }
+
+    .exp-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .exp-role {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .exp-company {
+      font-size: 0.84rem;
+      color: #a5b4fc;
+      white-space: nowrap;
+    }
+
+    .exp-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .exp-points {
+      list-style: disc;
+      padding-left: 18px;
+      margin-top: 2px;
+    }
+
+    .exp-points li {
+      margin-bottom: 3px;
+    }
+
+    /* EDUCATION & LANG */
+
+    .edu-item {
+      margin-bottom: 10px;
+    }
+
+    .edu-degree {
+      font-weight: 500;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+    }
+
+    .edu-meta {
+      font-size: 0.84rem;
+      color: #a5b4fc;
+      margin-bottom: 2px;
+    }
+
+    .edu-location {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .lang-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .lang-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 0.8rem;
+      color: var(--text-main);
+    }
+
+    /* PROJECTS */
+
+    .projects-list {
+      display: grid;
+      gap: 10px;
+      font-size: 0.86rem;
+    }
+
+    .project-item {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 10px 12px 8px;
+      background: rgba(15, 23, 42, 0.98);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        130deg,
+        rgba(129, 140, 248, 0.2),
+        rgba(236, 72, 153, 0.15),
+        transparent
+      );
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .project-item:hover::before {
+      opacity: 1;
+    }
+
+    .project-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      color: #a5b4fc;
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    .project-tech {
+      margin-top: 3px;
+      font-size: 0.78rem;
+      color: #f97316;
+    }
+
+    /* CONTACT */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 850px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .contact-label {
+      width: 80px;
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .social-chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.96);
+      transition: var(--transition-fast);
+    }
+
+    .social-chip:hover {
+      transform: translateY(-1px);
+      background: radial-gradient(circle at top, rgba(96, 165, 250, 0.3), transparent);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 1);
+    }
+
+    .social-icon {
+      font-size: 1rem;
+    }
+
+    .email-link {
+      color: #93c5fd;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .contact-form {
+      padding: 10px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.25), transparent 65%),
+        rgba(15, 23, 42, 0.98);
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .contact-form p {
+      margin-bottom: 8px;
+    }
+
+    .contact-hint {
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .footer-dot {
+      color: #22c55e;
+      margin: 0 3px;
+    }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <header class="card">
-      <div class="brand">
-        <div class="logo">SK</div>
-        <div class="title">
-          <h1>Saravanakumar Chandrasekar</h1>
-          <p>DevOps · Linux · Web · Weather-app enthusiast</p>
+  <div class="page-wrapper">
+    <!-- NAVBAR -->
+    <header>
+      <nav class="nav-bar">
+        <div class="nav-logo">
+          <div class="nav-avatar">
+            <div class="nav-avatar-inner">SC</div>
+          </div>
+          <div>
+            <div class="nav-title-main">Saravanakumar Chandrasekar</div>
+            <div class="nav-title-sub">DevOps & Cloud Engineer</div>
+          </div>
         </div>
-      </div>
-
-      <div class="controls">
-        <!-- Inline cotton-candy mascot near header controls -->
-        <div class="ccd-inline" aria-hidden="true" style="pointer-events:none;display:flex;align-items:center;gap:8px;margin-right:6px">
-          <svg viewBox="0 0 320 280" width="88" height="75" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g transform="translate(14,10)"><ellipse cx="30" cy="30" rx="32" ry="46" fill="#ff9fb1"/></g>
-            <g transform="translate(214,10)"><ellipse cx="30" cy="30" rx="32" ry="46" fill="#ff9fb1"/></g>
-            <ellipse cx="160" cy="140" rx="110" ry="95" fill="#ffdce6" stroke="#ffb6c9" stroke-width="4"/>
-            <g transform="translate(110,125)"><ellipse cx="0" cy="0" rx="28" ry="22" fill="#ffffff"/><circle class="ccd-pupil" data-eye="left" cx="0" cy="0" r="10" fill="#2b2a33"/><circle cx="-6" cy="-4" r="3" fill="#ffffff" opacity="0.9"/></g>
-            <g transform="translate(210,125)"><ellipse cx="0" cy="0" rx="28" ry="22" fill="#ffffff"/><circle class="ccd-pupil" data-eye="right" cx="0" cy="0" r="10" fill="#2b2a33"/><circle cx="-6" cy="-4" r="3" fill="#ffffff" opacity="0.9"/></g>
-            <path d="M150 160 Q160 175 170 160" fill="#ff9fb1" stroke="#ff7a9a" stroke-width="3" stroke-linecap="round"/>
-          </svg>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact" class="nav-contact-btn">Contact</a>
         </div>
-
-        <button class="btn" id="downloadBtn" title="Download CV (placeholder)">
-          ⬇️ Download CV
-        </button>
-        <button class="btn" id="themeToggle" title="Toggle light / dark">
-          🌗
-        </button>
-      </div>
+      </nav>
     </header>
 
-    <main class="main">
-      <section class="hero card">
-        <div class="avatar">SK</div>
-        <div class="info">
-          <h2>Hello — I'm Saravanakumar</h2>
-          <p class="muted">QA turned DevOps learner. Building a Weather-App and experimenting with Linux servers, automation, and CI/CD.</p>
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-left">
+          <div class="hero-content">
+            <div class="hero-tag">
+              <span class="hero-dot"><span class="hero-dot-inner">●</span></span>
+              <span>Open to DevOps / Cloud Engineer roles</span>
+            </div>
+            <h1 class="hero-title">
+              Hi, I'm <span>Saravanakumar&nbsp;Chandrasekar</span>
+            </h1>
+            <div class="hero-role">DevOps Engineer · AWS · Linux · Automation</div>
+            <p class="hero-subtitle">
+              DevOps Engineer with hands-on experience in <strong>AWS, Linux, Docker,
+              monitoring, and automation</strong>. I focus on <strong>system reliability,
+              observability</strong>, and working with teams to keep cloud environments stable and
+              scalable.
+            </p>
 
-          <div class="badges">
-            <div class="badge">Linux</div>
-            <div class="badge">Docker</div>
-            <div class="badge">Ansible</div>
-            <div class="badge">Python</div>
-            <div class="badge">GitHub Pages</div>
+            <div class="hero-badges">
+              <div class="pill pill-accent-1">
+                <span class="pill-dot"></span>
+                3+ years combined industry experience
+              </div>
+              <div class="pill pill-accent-2">
+                <span class="pill-dot"></span>
+                AWS · Linux · Docker · Monitoring
+              </div>
+              <div class="pill pill-accent-3">
+                <span class="pill-dot"></span>
+                Prometheus · Grafana · LogicMonitor
+              </div>
+              <div class="pill pill-accent-4">
+                <span class="pill-dot"></span>
+                Git · Automation · Troubleshooting
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary">
+                <span class="btn-icon">📩</span> Contact Me
+              </a>
+              <a href="mailto:cvsaravanah@gmail.com" class="btn-ghost">
+                <span class="btn-icon">✉️</span> Email: cvsaravanah@gmail.com
+              </a>
+            </div>
           </div>
         </div>
+
+        <!-- HERO RIGHT -->
+        <aside class="hero-right">
+          <div class="hero-right-inner">
+            <div class="hero-badge-header">
+              <span>Snapshot</span>
+              <span class="status-pill">Actively looking for opportunities</span>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-bullet"></div>
+                <div>
+                  <div class="timeline-title">DevOps Engineer</div>
+                  <div class="timeline-subtitle">
+                    LTIMindtree
+                  </div>
+                  <div class="timeline-meta">
+                    Mar 2022 – Apr 2023 · AWS · Docker · Monitoring · Automation
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-bullet"></div>
+                <div>
+                  <div class="timeline-title">Systems / Cloud Support</div>
+                  <div class="timeline-subtitle">
+                    BSH Household Appliances Pvt Ltd
+                  </div>
+                  <div class="timeline-meta">
+                    Aug 2020 – Jan 2022 · AWS · Linux · Windows Server
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-bullet"></div>
+                <div>
+                  <div class="timeline-title">B.E. Computer Science & Engineering</div>
+                  <div class="timeline-subtitle">
+                    KPR Institute of Engineering and Technology
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-skill-cloud">
+              <span class="skill-chip">AWS (EC2, S3, VPC, IAM, CloudWatch)</span>
+              <span class="skill-chip">Linux (RHEL / Ubuntu)</span>
+              <span class="skill-chip">Windows Server</span>
+              <span class="skill-chip">Docker</span>
+              <span class="skill-chip">Prometheus</span>
+              <span class="skill-chip">Grafana</span>
+              <span class="skill-chip">LogicMonitor</span>
+              <span class="skill-chip">Bash / Shell Scripting</span>
+            </div>
+          </div>
+        </aside>
       </section>
 
-      <!-- rest of the portfolio content (projects, about, etc.) is unchanged -->
-
-      <!-- Featured Projects -->
-      <section class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
+      <!-- ABOUT & SKILLS -->
+      <section class="section" id="about">
+        <div class="two-col">
+          <!-- ABOUT -->
           <div>
-            <h3 style="margin:0">Featured Projects</h3>
-            <p class="muted tiny" style="margin-top:6px">A selection of projects and demos — click to view.</p>
+            <div class="section-header">
+              <h2 class="section-title">About Me</h2>
+              <span class="section-pill">Profile Summary</span>
+            </div>
+            <div class="section-body">
+              <p>
+                I am a <strong>DevOps Engineer</strong> with practical experience in
+                <strong>AWS, Linux, Docker, monitoring tools, and automation</strong>.
+                My focus is on enhancing system stability, improving observability, and
+                collaborating with cross-functional teams to keep applications
+                <strong>fast, available, and reliable</strong>.
+              </p>
+              <p style="margin-top:8px;">
+                I have worked on <strong>provisioning and maintaining AWS services</strong>,
+                handling Linux and Windows Server administration, configuring
+                <strong>monitoring dashboards</strong> in Prometheus, Grafana, and LogicMonitor,
+                and using <strong>Bash and Git</strong> to automate routine tasks and updates.
+              </p>
+              <p style="margin-top:8px;">
+                I enjoy understanding how systems behave in production, digging into logs,
+                and fixing issues at the root cause rather than just treating symptoms.
+              </p>
+            </div>
           </div>
-          <div class="pill tiny">Updated: Oct 26, 2025</div>
+
+          <!-- SKILLS -->
+          <div id="skills">
+            <div class="section-header">
+              <h2 class="section-title">Key Skills</h2>
+              <span class="section-pill">Tech Stack</span>
+            </div>
+            <div class="section-body">
+              <div class="skills-grid">
+                <div class="skill-card">
+                  <div class="skill-name">AWS Cloud</div>
+                  <div class="skill-tag">EC2 · S3 · VPC · IAM · CloudWatch</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 85%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Linux</div>
+                  <div class="skill-tag">RHEL · Ubuntu · Server Admin</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 85%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Windows Server</div>
+                  <div class="skill-tag">User Management · Patches · Services</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 80%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Docker</div>
+                  <div class="skill-tag">Containers · Images · Optimization</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 78%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Monitoring</div>
+                  <div class="skill-tag">Prometheus · Grafana · LogicMonitor</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 80%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Automation</div>
+                  <div class="skill-tag">Bash / Shell · Git Workflows</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 78%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Version Control</div>
+                  <div class="skill-tag">Git · GitHub · GitLab</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 82%;"></div>
+                  </div>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-name">Troubleshooting</div>
+                  <div class="skill-tag">Logs · Server Issues · Network Basics</div>
+                  <div class="skill-bar">
+                    <div class="skill-bar-fill" style="--level: 80%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <div class="projects" style="margin-top:14px">
-          <!-- Project 1 -->
-          <article class="card">
-            <div class="project-title">
-              <h3>Weather-App (DevOps Guide)</h3>
-              <span class="muted tiny">Node • Docker • GitHub Actions</span>
-            </div>
-            <p class="project-desc">A small weather dashboard + CI pipeline. Includes automated tests and a deployment workflow. (Roadmap tracked in chat.)</p>
-
-            <div class="project-meta">
-              <div class="tags">
-                <div class="tag">CI/CD</div>
-                <div class="tag">Docker</div>
-                <div class="tag">pytest</div>
-              </div>
-              <div class="links">
-                <a class="link" href="https://github.com/SaravanaKumarChandrasekar" target="_blank" rel="noopener">GitHub</a>
-                <a class="link secondary" href="#" onclick="alert('Replace with live link')" >Live</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="card">
-            <div class="project-title">
-              <h3>Linux Server Lab Notes</h3>
-              <span class="muted tiny">BIND • Samba • Mail</span>
-            </div>
-            <p class="project-desc">Practical lab configs for DNS, Samba, mail and more — crafted as step-by-step guides you can follow from scratch.</p>
-
-            <div class="project-meta">
-              <div class="tags">
-                <div class="tag">RHEL</div>
-                <div class="tag">BIND</div>
-                <div class="tag">Samba</div>
-              </div>
-              <div class="links">
-                <a class="link" href="#" onclick="alert('Open your notes file or repo')" >Notes</a>
-                <a class="link secondary" href="#" onclick="alert('Open terminal guide')" >Guide</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3 -->
-          <article class="card">
-            <div class="project-title">
-              <h3>Portfolio Website</h3>
-              <span class="muted tiny">HTML • Nginx • HTTPS</span>
-            </div>
-            <p class="project-desc">This single-file portfolio is mobile-friendly, with dark mode and quick contact controls — perfect for GitHub Pages or EC2 hosting.</p>
-
-            <div class="project-meta">
-              <div class="tags">
-                <div class="tag">GitHub Pages</div>
-                <div class="tag">Nginx</div>
-              </div>
-              <div class="links">
-                <a class="link" href="https://SaravanaKumarChandrasekar.github.io" target="_blank" rel="noopener">GitHub Pages</a>
-                <a class="link secondary" href="#" onclick="alert('Map elastic IP → domain via DNS & reverse proxy')" >Deploy</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 4 -->
-          <article class="card">
-            <div class="project-title">
-              <h3>Automation Scripts</h3>
-              <span class="muted tiny">Bash • Ansible</span>
-            </div>
-            <p class="project-desc">Shell utilities and Ansible playbooks for provisioning servers, configuring YUM repos, and automating repetitive tasks.</p>
-
-            <div class="project-meta">
-              <div class="tags">
-                <div class="tag">Ansible</div>
-                <div class="tag">YUM</div>
-              </div>
-              <div class="links">
-                <a class="link" href="#" onclick="alert('Open playbook repo')">Repo</a>
-                <a class="link secondary" href="#" onclick="alert('Run playbook instructions')">Run</a>
-              </div>
-            </div>
-          </article>
-        </div>
-
       </section>
 
-      <section class="card" style="margin-top:14px">
-        <h3 style="margin:0">About / Summary</h3>
-        <p class="muted" style="margin-top:8px">
-          I'm focused on learning server automation, containerization, monitoring (Prometheus & Grafana), and delivering reliable deployments for small web apps like the Weather-App.
-          I prefer clear, step-by-step guides (atom-level explanations) so anyone can reproduce the setup.
-        </p>
-
-        <div class="sep"></div>
-
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <!-- EXPERIENCE & EDUCATION -->
+      <section class="section" id="experience">
+        <div class="two-col">
+          <!-- EXPERIENCE -->
           <div>
-            <strong>Current focus</strong>
-            <div class="muted tiny">Docker → CI → Monitoring → Terraform / Ansible</div>
+            <div class="section-header">
+              <h2 class="section-title">Professional Experience</h2>
+              <span class="section-pill">Cloud · DevOps · Monitoring</span>
+            </div>
+            <div class="section-body">
+              <div class="exp-list">
+                <div class="exp-item">
+                  <div class="exp-title-row">
+                    <div class="exp-role">DevOps Engineer</div>
+                    <div class="exp-company">LTIMindtree</div>
+                  </div>
+                  <div class="exp-meta">Mar 2022 – Apr 2023</div>
+                  <ul class="exp-points">
+                    <li>Designed and supported AWS environments using EC2, ALB, VPC, IAM roles and CloudWatch.</li>
+                    <li>Built and maintained Docker containers and optimized images for deployment.</li>
+                    <li>Automated cloud/server workflows using Shell scripting and Git-based pipelines.</li>
+                    <li>Configured and maintained monitoring using LogicMonitor, Prometheus and Grafana.</li>
+                    <li>Worked closely with dev, QA and network teams to resolve deployment and cloud issues.</li>
+                    <li>Handled incidents, troubleshooting, and contributed to environment stability improvements.</li>
+                  </ul>
+                </div>
+
+                <div class="exp-item">
+                  <div class="exp-title-row">
+                    <div class="exp-role">Cloud / System Support Engineer</div>
+                    <div class="exp-company">BSH Household Appliances Pvt Ltd</div>
+                  </div>
+                  <div class="exp-meta">Aug 2020 – Jan 2022</div>
+                  <ul class="exp-points">
+                    <li>Assisted in provisioning and maintaining AWS services such as EC2, S3 and IAM.</li>
+                    <li>Handled Linux and Windows Server tasks: user management, patches and troubleshooting.</li>
+                    <li>Performed routine checks including log review, service restarts and health monitoring.</li>
+                    <li>Used Prometheus and Grafana for basic performance monitoring and dashboards.</li>
+                    <li>Used Git for configuration updates and version control.</li>
+                    <li>Supported incident management by gathering logs and documenting issues.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div style="flex:1"></div>
-          <div class="tiny muted"></div>
+
+          <!-- EDUCATION & LANGUAGES -->
+          <div id="education">
+            <div class="section-header">
+              <h2 class="section-title">Education & Languages</h2>
+              <span class="section-pill">Background</span>
+            </div>
+            <div class="section-body">
+              <div class="edu-item">
+                <div class="edu-degree">B.E. Computer Science and Engineering</div>
+                <div class="edu-meta">KPR Institute of Engineering and Technology</div>
+                <div class="edu-location">Coimbatore, Tamil Nadu, India</div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <strong>Languages</strong>
+                <div class="lang-list">
+                  <span class="lang-pill">Tamil</span>
+                  <span class="lang-pill">English</span>
+                  <!-- Add more if you want -->
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
+      <!-- PROJECTS (PERSONAL) -->
+      <section class="section" id="projects">
+        <div class="section-header">
+          <h2 class="section-title">Personal Projects</h2>
+          <span class="section-pill">Non-Professional</span>
+        </div>
+        <div class="section-body">
+          <div class="projects-list">
+            <!-- WEATHER APP AS PERSONAL PROJECT ONLY -->
+            <div class="project-item">
+              <div class="project-title-row">
+                <div class="project-title">Weather App (Personal Project)</div>
+                <div class="project-tag">Learning · Practice</div>
+              </div>
+              <p class="project-desc">
+                Built a personal weather application as a learning project to practice cloud,
+                Linux and DevOps concepts. Used it to experiment with deployment, monitoring,
+                and automation workflows.
+              </p>
+              <div class="project-tech">
+                Focus: Linux · Git · CI/CD · Monitoring · Cloud Deployment
+              </div>
+            </div>
+
+            <!-- You can add more personal / learning projects here later -->
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="section-header">
+          <h2 class="section-title">Get in Touch</h2>
+          <span class="section-pill">Let's Connect</span>
+        </div>
+        <div class="section-body contact-grid">
+          <!-- CONTACT INFO -->
+          <div class="contact-info">
+            <div class="contact-line">
+              <span class="contact-label">Email</span>
+              <span>
+                <a class="email-link" href="mailto:cvsaravanah@gmail.com">cvsaravanah@gmail.com</a>
+              </span>
+            </div>
+            <div class="contact-line">
+              <span class="contact-label">Phone</span>
+              <span>+91&nbsp;98430&nbsp;19004</span>
+            </div>
+            <div class="contact-line">
+              <span class="contact-label">Location</span>
+              <span>Coimbatore, Tamil Nadu, India</span>
+            </div>
+
+            <div class="contact-line">
+              <span class="contact-label">Links</span>
+              <div class="social-links">
+                <!-- Replace these href values with your real links -->
+                <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer" class="social-chip">
+                  <span class="social-icon">🔗</span> LinkedIn
+                </a>
+                <a href="https://github.com/your-github" target="_blank" rel="noreferrer" class="social-chip">
+                  <span class="social-icon">💻</span> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTACT INFO TEXT -->
+          <div class="contact-form">
+            <p>
+              If you’re looking for someone who enjoys working with <strong>AWS, Linux, Docker,
+              monitoring and automation</strong>, feel free to reach out. I’m interested in roles
+              related to <strong>DevOps, Cloud Engineering, SRE and Infrastructure</strong>.
+            </p>
+            <p class="contact-hint">
+              Click here to start an email:
+              <a
+                class="email-link"
+                href="mailto:cvsaravanah@gmail.com?subject=Opportunity%20for%20DevOps%20%2F%20Cloud%20Engineer"
+              >
+                Write to Saravana
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        © <span id="year"></span> Saravanakumar Chandrasekar
+        <span class="footer-dot">•</span>
+        Built for stability, automation & learning.
+      </footer>
     </main>
-
-    <aside class="sidebar">
-      <div class="profile-line">
-        <div class="small-avatar">SK</div>
-        <div>
-          <div style="font-weight:800">Saravanakumar Chandrasekar</div>
-          <div class="muted tiny">QA • Aspiring DevOps</div>
-        </div>
-      </div>
-
-      <p class="bio muted" style="margin-top:12px">
-        I build reproducible dev environments, document steps in detail, and keep a learning roadmap for the Weather-App and Linux labs.
-      </p>
-
-      <div style="margin-top:12px">
-        <div style="font-weight:800;margin-bottom:8px">Skills</div>
-        <div class="skill-list">
-          <div class="skill">Linux</div>
-          <div class="skill">Bash</div>
-          <div class="skill">Docker</div>
-          <div class="skill">Git</div>
-          <div class="skill">Nginx</div>
-          <div class="skill">Python</div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px">
-        <div style="font-weight:800;margin-bottom:8px">Contact</div>
-        <div class="contact">
-          <a href="mailto:cvsaravanah@gmail.com" class="tiny">✉️ Email</a>
-          <a href="https://github.com/SaravanaKumarChandrasekar" target="_blank" rel="noopener" class="tiny">🐙 GitHub</a>
-          <a href="https://SaravanaKumarChandrasekar.github.io" target="_blank" rel="noopener" class="tiny">🌐 GitHub Pages</a>
-        </div>
-      </div>
-
-      <div style="margin-top:14px">
-        <div style="font-weight:800;margin-bottom:8px">Quick Contact</div>
-        <form onsubmit="sendContact(event)">
-          <input type="text" id="name" placeholder="Your name" required>
-          <div style="height:8px"></div>
-          <input type="text" id="email" placeholder="Your email" required>
-          <div style="height:8px"></div>
-          <textarea id="message" placeholder="Short message" rows="3" required></textarea>
-          <div class="cta-row" style="margin-top:8px">
-            <button type="submit" class="btn primary">Send</button>
-            <button type="button" class="btn" onclick="copyEmail()">Copy Email</button>
-          </div>
-        </form>
-      </div>
-    </aside>
-
-    <footer>
-      Built with care • Single-file portfolio • Replace placeholder content with your real links. © Saravanakumar Chandrasekar
-    </footer>
-  </div>
-
-  </div>
   </div>
 
   <script>
-    // Prefill from memory (we used your name from chat history)
-    const userName = "Saravanakumar Chandrasekar";
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    (function initTheme(){
-      const saved = localStorage.getItem('site-theme');
-      if(saved === 'light'){ body.classList.add('light') }
-    })();
-    themeToggle.addEventListener('click',()=>{
-      body.classList.toggle('light');
-      localStorage.setItem('site-theme', body.classList.contains('light') ? 'light' : 'dark');
-    });
-
-    // Download CV placeholder (could be wired to a real CV file)
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-      const link = document.createElement('a');
-      link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(userName + ' — CV placeholder\nReplace with actual PDF link.');
-      link.download = 'CV_' + userName.replace(/\s+/g,'_') + '.txt';
-      link.click();
-    });
-
-    // Contact form uses mailto fallback
-    function sendContact(e){
-      e.preventDefault();
-      const n = document.getElementById('name').value.trim();
-      const em = document.getElementById('email').value.trim();
-      const msg = document.getElementById('message').value.trim();
-      const subject = encodeURIComponent('Portfolio message from ' + n);
-      const body = encodeURIComponent('Name: ' + n + '\nEmail: ' + em + '\n\n' + msg);
-      // opens mail client
-      window.location.href = 'mailto:your.email@example.com?subject=' + subject + '&body=' + body;
-    }
-
-    function copyEmail(){
-      navigator.clipboard?.writeText('your.email@example.com')?.then(()=>alert('Email copied to clipboard'));
-    }
-
-    // --- Cotton Candy mascot: eyes follow cursor ---
-    (function(){
-      const mascot = document.querySelector('.ccd-mascot');
-      const pupils = Array.from(document.querySelectorAll('.ccd-pupil'));
-
-      let pointer = {x: window.innerWidth/2, y: window.innerHeight/2};
-
-      function updatePointer(e){
-        if(e.touches && e.touches.length){
-          pointer.x = e.touches[0].clientX;
-          pointer.y = e.touches[0].clientY;
-        } else {
-          pointer.x = e.clientX;
-          pointer.y = e.clientY;
-        }
-      }
-
-      window.addEventListener('mousemove', updatePointer);
-      window.addEventListener('touchmove', function(ev){ ev.preventDefault(); updatePointer(ev); }, {passive:false});
-
-      function computeEyes(){
-        return pupils.map(p => {
-          const eyeGroup = p.parentNode;
-          const eyeRect = eyeGroup.getBoundingClientRect();
-          const cx = eyeRect.left + eyeRect.width/2;
-          const cy = eyeRect.top + eyeRect.height/2;
-          const max = Math.min(eyeRect.width, eyeRect.height) * 0.28;
-          return {pupil:p, cx, cy, max};
-        });
-      }
-
-      let eyes = computeEyes();
-      window.addEventListener('resize', ()=>{ eyes = computeEyes(); });
-
-      function animate(){
-        for(const e of eyes){
-          const dx = pointer.x - e.cx;
-          const dy = pointer.y - e.cy;
-          const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-          const nx = dx/dist, ny = dy/dist;
-          const d = Math.min(e.max, dist*0.14 + 2);
-          const tx = nx * d;
-          const ty = ny * d;
-          e.pupil.style.transform = `translate(${tx}px, ${ty}px)`;
-        }
-        requestAnimationFrame(animate);
-      }
-
-      pointer.x = window.innerWidth/2; pointer.y = window.innerHeight/2;
-      requestAnimationFrame(animate);
-
-    })();
-
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
